@@ -23,6 +23,11 @@ public class Client {
         System.out.println(clazz2);
         System.out.println("\t" + clazz2.getClassLoader());
 
+        NetClassLoader netClassLoader = new NetClassLoader();
+        Class clazz3 = netClassLoader.loadClass("https://raw.githubusercontent.com/redaness/custom-classloader/master/src/main/resources/BussService.class");
+        System.out.println(clazz3);
+        System.out.println("\t" + clazz3.getClassLoader());
+
         //由AppClassLoader加载
         //sun.misc.Launcher$AppClassLoader@18b4aac2
         System.out.println(NetClassLoader.class);
@@ -31,11 +36,12 @@ public class Client {
         //clazz1和NetClassLoader是同一个类，但是他们并不相同,因为不是同一个类加载器加载的
         System.out.println(clazz1.equals(NetClassLoader.class));
         System.out.println(clazz.equals(clazz2));
+
         //由Ext加载器加载
         //sun.misc.Launcher$ExtClassLoader@1b6d3586
-        Class clazz3 = Class.forName("jdk.nashorn.api.scripting.ClassFilter");
-        System.out.println(clazz3);
-        System.out.println("\t" + clazz3.getClassLoader());
+        Class clazz4 = Class.forName("jdk.nashorn.api.scripting.ClassFilter");
+        System.out.println(clazz4);
+        System.out.println("\t" + clazz4.getClassLoader());
 
         //null 表明由Bootstrap构造器加载
         System.out.println(String.class);

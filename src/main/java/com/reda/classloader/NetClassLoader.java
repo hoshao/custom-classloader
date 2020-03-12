@@ -1,5 +1,7 @@
 package com.reda.classloader;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -11,10 +13,8 @@ public class NetClassLoader extends ClassLoader{
         try {
             URL url = new URL(name);
             InputStream is = url.openStream();
-            byte[] bytes = new byte[is.available()];
-            is.read(bytes);
-            //name 必须为全限定名
-            return defineClass(null,bytes,0,bytes.length);
+            byte[] dest = IOUtils.toByteArray(is);
+            return defineClass(null,dest,0,dest.length);
         } catch (IOException e) {
             e.printStackTrace();
         }
